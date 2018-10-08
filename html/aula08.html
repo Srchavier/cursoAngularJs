@@ -1,0 +1,75 @@
+<html ng-app="app">
+
+<head>
+    <title>Curso angularJS</title>
+    <meta charset="utf-8">
+
+    <style>
+        input.ng-invalid.ng-touched {
+            background: rgb(240, 131, 131);
+
+        }
+        input.ng-valid.ng-touched {
+            background: rgb(177, 236, 177);
+        }
+    
+    </style>
+</head>
+
+<body ng-controller="aula08Controller">
+
+    <form name="frm" ng-submit="salvarPessoa(pessoa)">
+        <p>
+            nome: <input type="text" ng-model='pessoa.nome' name="nome" required>
+        </p>
+
+        <div ng-show="frm.$submitted || frm.nome.$touched">
+            <div ng-show="frm.nome.$error.required">O campo nome deve ser preenchido!</div>
+        </div>
+
+        <p>
+            E-mail: <input type="email" ng-model='pessoa.email' name="email" required>
+        </p>
+        
+        <div ng-show="frm.$submitted || frm.email.$touched">
+            <div ng-show="frm.email.$error.required">O campo nome deve ser preenchido!</div>
+            <div ng-show="frm.sexo.$error.email">O campo nome deve ser conter um e-mail!</div>
+        </div>
+
+        <p>
+            Sexo:
+            <input type="radio" value="m" ng-model='pessoa.sexo'>Masculino
+            <input type="radio" value="f" ng-model='pessoa.sexo'>Feminino
+        </p>
+        <div ng-show="frm.$submitted || frm.sexo.$touched">
+            <div ng-show="frm.sexo.$error.required">O campo nome deve ser conter um e-mail!</div>
+        </div>
+        
+        <p>
+            Estado:
+            <select ng-model="pessoa.estado">
+                <option ng-repeat='estado in estados' value="{{estado}}" ng-selected="estado == pessoa.estado">{{estado}}</option>
+            </select>
+        </p>
+        <p>
+            <input type="submit" value="Salvar" ng-disabled="frm.$invalid">
+        </p>
+
+        <pre>
+            {{pessoa | json }}
+        </pre>
+        <pre>
+                {{pessoas| json }}
+        </pre>
+    </form>
+
+    <script src="../js/angular/angular.min.js"></script>
+    <script src="../js/app.module.js"></script>
+
+    <!-- Controlles -->
+
+    <script src="../js/aula08.controller.js"></script>
+
+</body>
+
+</html>

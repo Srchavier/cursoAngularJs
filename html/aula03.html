@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <title>Introdução ao JavaScript</title>
+    <meta charset="utf-8">
+
+    <script>
+        var total = 1 + 2;
+        console.log(total);
+
+        var pessoa = {
+            nome: 'eduardo',
+            idade: 40,
+            status: true
+        }
+
+        // for(var i =0; i < 50; i++){
+        // document.write('<p>'+ i +'</p>')
+        //  }
+        function carregar() {
+            document.getElementById('campo').value = total;
+        }
+
+    </script>
+</head>
+
+<body onload="carregar()">
+    <input type="text" value="" id="campo">
+</body>
+
+</html>

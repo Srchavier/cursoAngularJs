@@ -1,0 +1,38 @@
+<html ng-app="app">
+
+<head>
+    <title>Curso angularJS</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <div ng-controller="aula09Controller">
+        controle1
+
+        {{pessoa.nome}}
+
+        <button ng-click="pessoa.cumprimentar()">click</button>
+    </div>
+    <div ng-controller="aula09Controller2">
+        controle2
+    </div>
+
+    <script src="../js/angular/angular.min.js"></script>
+    <script src="../js/app.module.js"></script>
+
+    <!-- Service -->
+
+    <script src="../js/service/aula09.service.js"></script>
+
+    <!-- Model -->
+
+    <script src="../js/factory/aula09PessoaFactory.js"></script>
+
+    <!-- Controlles -->
+
+    <script src="../js/aula09.controller.js"></script>
+
+</body>
+
+</html>

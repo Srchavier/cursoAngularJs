@@ -1,0 +1,16 @@
+<html ng-app ng-init="valor1 = 5; valor2 = 10;">
+    <head>
+        <title>Curso angularJS</title>
+        <script src="../js/angular/angular.min.js"></script>
+    </head>
+    <body>
+
+        <h1 ng-bind="valor1"></h1>
+
+        <input type="number" ng-model="valor1">
+        <input type="number" ng-model="valor2">
+ 
+        <h1 ng-bind="valor1 + valor2"></h1>
+        {{valor1 + valor2}}
+    </body>
+</html>
