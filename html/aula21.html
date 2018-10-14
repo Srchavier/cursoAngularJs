@@ -1,0 +1,184 @@
+<html ng-app="app">
+
+<head>
+    <title>Curso AngularJS</title>
+    <meta charset="utf-8">
+    <script src="http://nervgh.github.io/js/es5-shim.min.js"></script>
+    <script src="http://nervgh.github.io/js/es5-sham.min.js"></script>
+    <style>
+        html, body {
+    height: 100%;
+}
+
+h1, h2 {
+    background-color: steelblue;
+    font-family: Tahoma, serif;
+    color: white;
+    padding: 10px;
+    letter-spacing: 1px;
+}
+
+h1 {
+    font-size: 1.3em;
+}
+
+h2 {
+    font-size: 1.2em;
+}
+
+canvas {
+    background-color: #f3f3f3;
+    -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+    -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+    box-shadow: 3px 3px 3px 0 #e3e3e3;
+    border: 1px solid #c3c3c3;
+    height: 100px;
+    margin: 6px 0 0 6px;
+}
+
+.nv-file-over {
+    background-color: #FFBEA3;
+}
+
+.other-drop-zone {
+    border: 2px dashed burlywood;
+    padding: 4px;
+    height: 100px;
+}
+
+.other-over-zone {
+    background-color: moccasin;
+}
+
+.bg {
+    background-color: lightgreen;
+}
+
+.over-zone {
+    border: 2px dashed lavender;
+    height: 100px;
+    padding: 4px;
+}
+
+.item-progress-box {
+    height: 20px;
+    margin-top: -20px;
+    margin-left: 60px;
+    margin-right: 10px;
+}
+
+.item-progress {
+    background-color: #90B8DA;
+    height: 100%;
+    width: 0;
+}
+
+.total-progress-box {
+    height: 20px;
+    margin-top: -20px;
+    margin-left: 90px;
+    margin-right: 10px;
+}
+
+.total-progress {
+    background-color: #90B8DA;
+    height: 100%;
+    width: 0;
+}
+
+.box {
+    margin: 20px;
+}
+
+.progress {
+    background-color: mediumpurple;
+    height: 20px;
+}
+
+.uploaded {
+    background-color: lightgreen;
+    height: 20px;
+    width: 100px;
+}
+
+ul > li:nth-child(odd) {
+    background-color: #f5f5f5;
+    margin: 2px;
+}
+
+.zone {
+    width: 49%;
+}</style>
+
+</head>
+
+<body>
+
+    <div ng-controller="Aula21Controller">
+
+            <!-- 3. nv-file-over uploader="link" over-class="className" -->
+            <div ng-show="uploader.isHTML5">
+                <div class="over-zone zone" nv-file-over="" uploader="uploader" style="float: left;">
+                    Base drop zone indication
+                </div>
+                <!-- Example: ng-file-drop | ng-file-drop="options" -->
+                <div nv-file-drop="" nv-file-over="" uploader="uploader" options="{url: '/foo'}" over-class="other-over-zone" class="other-drop-zone zone" style="float: right;">
+                    One more drop zone with its own settings (and indication)
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+    
+            <br />
+    
+            <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
+            <input type="file" nv-file-select="" uploader="uploader" multiple />
+    
+            <h2>The queue. Length: {{ uploader.queue.length }}</h2>
+            <ul>
+                <li ng-repeat="item in uploader.queue">
+                    <div>Name: {{ item.file.name }}</div>
+                    <div>Size: {{ item.file.size/1024/1024|number:2 }} Mb</div>
+                    <div ng-show="uploader.isHTML5">
+                        Progress: {{ item.progress }}
+                        <div class="item-progress-box">
+                            <div class="item-progress" ng-style="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                    </div>
+                    <div ng-if="controller.isImage(item._file)">
+                        Thumbnail (only images):
+                            <!-- Image preview -->
+                            <!--auto height-->
+                            <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                            <!--auto width-->
+                            <div ng-thumb="{ file: item._file, height: 100 }"></div>
+                            <!--fixed width and height -->
+                            <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                    </div>
+                    <div>
+                        <button ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">Upload</button>
+                        <button ng-click="item.cancel()" ng-disabled="!item.isUploading">Cancel</button>
+                        <button ng-click="item.remove()">Remove</button>
+                    </div>
+                </li>
+            </ul>
+            <div>
+                <div>
+                    Total progress: {{ uploader.progress }}
+                    <div class="total-progress-box">
+                        <div class="total-progress" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                    </div>
+                </div>
+                <button ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">Upload all</button>
+                <button ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">Cancel all</button>
+                <button ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">Remove all</button>
+            </div>
+        </div>
+
+        <script src="../js/angular/angular.min.js"></script>
+        <script src="../js/angular/angular-file-upload.min.js"></script>
+
+        <!-- controllers -->
+        <script src="../js/aula21.controller.js"></script>
+</body>
+
+</html>
