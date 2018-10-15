@@ -1,0 +1,49 @@
+<html ng-app="app">
+
+<head>
+    <title>Curso AngularJS</title>
+    <meta charset="utf-8">
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div ng-controller="Aula23Controller" ng-init="campo=''">
+
+        <h1>ui.unique</h1>
+
+        <button type="button" ng-click="campo=''">todos</button>
+        <button type="button" ng-click="campo='nome'">Nome</button>
+        <button type="button" ng-click="campo='email'">E-mail</button>
+
+        <div ng-repeat="usuario in usuarios | unique:campo">
+            {{usuario.nome}} // {{usuario.email}}
+        </div>
+        <hr>
+
+        <h1>ui.validate</h1>
+
+        <form name="formulario">
+            <input type="text" placeholder="senha" ng-model="senha1" name="senha1" required>
+            <input type="text" placeholder="confirmar senha" ng-model="senha2" name="senha2" required
+                ui-validate='"validar($value)"'
+                ui-validate-watch='"senha1"'>
+
+            <button type="submit" ng-disabled="!formulario.$valid">Enviar formulário</button>
+
+            <div ng-show="!formulario.$valid">Preencha todos os campos</div>
+        </form>
+    </div>
+
+    <script src="../js/angular/angular.min.js"></script>
+    <script src="../js/angular/angular-sanitize.min.js"></script>
+    <script src="../js/angular/ui-utils.min.js"></script>
+
+    <!-- controllers -->
+    <script src="../js/aula23.controller.js"></script>
+</body>
+
+</html>
