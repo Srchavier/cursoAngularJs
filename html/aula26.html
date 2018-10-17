@@ -1,0 +1,50 @@
+<html ng-app="app">
+
+<head>
+    <title>Curso AngularJS</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+    
+</head>
+
+<body>
+
+    <div ng-controller="Aula26Controller">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>Accordion</h1>
+                    <input type="text" ng-model="accor.heading">
+                    <input type="text" ng-model="accor.content">
+                    <button type="button" ng-click="addAccordion()">add</button>
+                    <hr>
+                    <uib-accordion>
+                        <div uib-accordion-group class="panel-default" heading="Titulo do accordion" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                            conteudo
+                          </div>
+                          <div uib-accordion-group class="panel-default" heading="Titulo do outro accordion">
+                            conteudo
+                          </div>
+                          <div uib-accordion-group class="panel-default" heading="{{grupo.heading}}" ng-repeat="grupo in grupos">
+                            <div class="alert alert-success">
+                                {{grupo.content}}
+                            </div>
+                          </div>
+                    </uib-accordion>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/angular/angular.min.js"></script>
+    <script src="../js/angular/ui-bootstrap-tpls-2.5.0.min.js"></script>
+
+    <!-- controllers -->
+    <script src="../js/aula26.controller.js"></script>
+
+</body>
+
+</html>
