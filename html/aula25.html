@@ -1,0 +1,92 @@
+<html ng-app="app">
+
+<head>
+    <title>Curso AngularJS</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+    <link rel="stylesheet" href="../js/angular/select.min.css">
+
+    <style>
+        body {
+            padding: 15px;
+        }
+
+        .select2>.select2-choice.ui-select-match {
+            /* Because of the inclusion of Bootstrap */
+            height: 29px;
+        }
+
+        .selectize-control>.selectize-dropdown {
+            top: 36px;
+        }
+
+        /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
+        .select-box {
+            background: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .alert-info.positioned {
+            margin-top: 1em;
+            position: relative;
+            z-index: 10000;
+            /* The select2 dropdown has a z-index of 9999 */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div ng-controller="Aula25Controller">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <h1>ui.select</h1>
+
+                    <ui-select ng-model="paisselecionado.selected" theme="bootstrap" reset-search-input="false">
+
+                        <ui-select-match placeholder="Digite o nome de um país">
+                            {{paisselecionado.selected.name}}
+                        </ui-select-match>
+
+                        <ui-select-choices repeat="pais in paises | filter : $select.search">
+                            {{ pais.name }} / {{ pais.code }}
+                        </ui-select-choices>
+
+                    </ui-select>
+
+                    <h3>Você selecionou {{ paisselecionado.selected.name }}</h3>
+
+                    <ui-select ng-model="paisselecionado2.selected" theme="selectize" ng-disabled="paisselecionado2.disabled"
+                        style="width: 300px;" title="Choose a country">
+                        <ui-select-match placeholder="Select or search a country in the list...">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="country in paises | filter: $select.search">
+                            <span ng-bind-html="country.name | highlight: $select.search"></span>
+                            <small ng-bind-html="country.code | highlight: $select.search"></small>
+                        </ui-select-choices>
+                    </ui-select>
+
+                    <h3>Selectize theme</h3>
+                    <p>Selected: {{paisselecionado2.selected}}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/angular/angular.min.js"></script>
+    <script src="../js/angular/select.min.js"></script>
+    <script src="../js/angular/angular-sanitize.min.js"></script>
+
+    <!-- controllers -->
+    <script src="../js/aula25.controller.js"></script>
+
+</body>
+
+</html>
